@@ -1,24 +1,43 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## usersテーブル
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
 
-* Ruby version
 
-* System dependencies
+### Association
+- has_many :post
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## placesテーブル
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| deity              | string | null: false               |
+| station            | string | null: false               |
+| address            | string | null: false               |
+| latitude           | float  | null: false               |
+| longitude          | float  | null: false               |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+- has_many :post
 
-* Deployment instructions
 
-* ...
+
+## postsテーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| text               | text       | null:false                     |
+| user               | references | null: false, foreign_key: true |
+| place              | references | null: false, foreign_key: true |
+
+
+### Association
+- belongs_to :user
+- belongs_to :place
